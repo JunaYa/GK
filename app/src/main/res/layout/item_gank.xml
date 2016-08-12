@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="gank.sin.me.gk.ui.search.SearchViewItemModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:onClick="@{viewModel.onWebActivity}"
+
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:background="@drawable/bg_item_search">
+
+
+        <TextView
+            android:id="@+id/dsc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.desc}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sp"
+            tools:text="description"/>
+        <TextView
+            android:id="@+id/who"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.who}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sp"
+            android:textStyle="bold"
+            tools:text="who"/>
+        <TextView
+            android:id="@+id/publish_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.publishedAt}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sp"
+            android:gravity="right"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            tools:text="2016-08-10"/>
+
+    </LinearLayout>
+</layout>

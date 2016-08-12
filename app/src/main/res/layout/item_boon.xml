@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="gank.sin.me.gk.ui.main.MainViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            fresco:placeholderImage="@mipmap/ic_launcher"
+            fresco:failureImage="@mipmap/ic_launcher"
+            fresco:imageUri="@{viewModel.getUrl}"
+            />
+
+    </LinearLayout>
+</layout>
