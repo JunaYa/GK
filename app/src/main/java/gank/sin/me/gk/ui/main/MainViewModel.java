@@ -20,17 +20,7 @@ import gank.sin.me.gk.ui.search.SearchActivity;
 
 public class MainViewModel extends BaseObservable {
 
-    private Gank mGank;
     private Provider<Context> mContext;
-    private String _id;
-    private String createdAt;
-    private String desc;
-    private String publishedAt;
-    private String source;
-    private String type;
-    private String url;
-    private boolean used;
-    private String who;
 
     @Inject
     public MainViewModel(@ActivityContext Provider<Context> context) {
@@ -42,48 +32,4 @@ public class MainViewModel extends BaseObservable {
         mContext.get().startActivity(SearchActivity.newIntent(mContext.get()));
     }
 
-    @Bindable
-    public String get_id() {
-        return _id;
-    }
-
-    @Bindable
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    @Bindable
-    public String getDesc() {
-        return desc;
-    }
-
-    @Bindable
-    public String getPublishedAt() {
-        return publishedAt;
-    }
-
-    @Bindable
-    public String getSource() {
-        return source;
-    }
-
-    @Bindable
-    public String getType() {
-        return type;
-    }
-
-    @Bindable
-    public String getUrl() {
-        return url;
-    }
-
-    @Bindable
-    public boolean isUsed() {
-        return used;
-    }
-
-    @Bindable
-    public String getWho() {
-        return who;
-    }
 }

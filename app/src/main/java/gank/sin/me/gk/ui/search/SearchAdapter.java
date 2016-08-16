@@ -15,6 +15,7 @@ import javax.inject.Provider;
 import gank.sin.me.gk.R;
 import gank.sin.me.gk.data.model.Search;
 import gank.sin.me.gk.databinding.ItemGankBinding;
+import gank.sin.me.gk.databinding.ItemSearchBinding;
 import gank.sin.me.gk.databinding.ViewFootMoreBinding;
 import gank.sin.me.gk.databinding.ViewFootNoMoreBinding;
 
@@ -69,7 +70,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.GankHolder
     @Override
     public GankHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_DEFAULT) {
-            ItemGankBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_gank, parent, false);
+            ItemSearchBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_search, parent, false);
             return new GankHolder(binding);
         } else if (viewType == TYPE_MORE) {
             ViewFootMoreBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.view_foot_more, parent, false);
@@ -89,8 +90,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.GankHolder
         } else {
             SearchViewItemModel model = mProvider.get();
             model.setSearch(mSearches.get(position));
-            ((ItemGankBinding)holder.getBinding()).setViewModel(model);
-            ((ItemGankBinding)holder.getBinding()).executePendingBindings();
+            ((ItemSearchBinding)holder.getBinding()).setViewModel(model);
         }
     }
 

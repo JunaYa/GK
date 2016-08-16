@@ -50,4 +50,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha5'
     testCompile 'junit:junit:4.12'
     provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile project(path: ':common')
 }

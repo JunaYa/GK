@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 import javax.inject.Named;
 
@@ -13,6 +14,9 @@ import dagger.Module;
 import dagger.Provides;
 import gank.sin.me.gk.dagger.ActivityContext;
 import gank.sin.me.gk.ui.base.BaseActivity;
+import gank.sin.me.gk.ui.base.BaseFragment;
+import gank.sin.me.gk.ui.fragments.boon.BoonFragment;
+import gank.sin.me.gk.ui.fragments.empty.EmptyFragment;
 
 /**
  * Created by qoo on 16-8-5.
@@ -45,6 +49,15 @@ public class ActivityModule {
     @Named("grid_two")
     StaggeredGridLayoutManager provideStaggeredGridLayoutManager(){
         return new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+    }
+
+    @Provides
+    @Named("fragments")
+    ArrayList<BaseFragment> provideFragments(){
+        ArrayList<BaseFragment> fragments = new ArrayList<>();
+        fragments.add(new BoonFragment());
+        fragments.add(new EmptyFragment());
+        return fragments;
     }
 
 

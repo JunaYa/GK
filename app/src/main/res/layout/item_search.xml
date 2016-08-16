@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="gank.sin.me.gk.ui.fragments.boon.BoonItemViewModel"/>
+            type="gank.sin.me.gk.ui.search.SearchViewItemModel"/>
     </data>
 
     <LinearLayout
@@ -16,6 +16,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:clickable="true"
+        android:onClick="@{viewModel.onWebActivity}"
+
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:background="@drawable/bg_item_search">
 
@@ -24,27 +26,27 @@
             android:id="@+id/dsc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.desc}"
             android:textColor="@color/black"
             android:textSize="@dimen/_16sp"
-            android:text="@{viewModel.desc}"
             tools:text="description"/>
         <TextView
             android:id="@+id/who"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.who}"
             android:textColor="@color/black"
             android:textSize="@dimen/_16sp"
-            android:text="@{viewModel.who}"
             android:textStyle="bold"
             tools:text="who"/>
         <TextView
             android:id="@+id/publish_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.publishedAt}"
             android:textColor="@color/black"
             android:textSize="@dimen/_16sp"
             android:gravity="right"
-            android:text="@{viewModel.publishedAt}"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             tools:text="2016-08-10"/>
 

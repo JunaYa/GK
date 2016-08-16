@@ -52,6 +52,6 @@ public interface GankApi {
     @GET("day/history")
     Observable<Result<List<String>>> getHistoryDates();
 
-    @GET("data/10/{page}")
-    Observable<Result<List<Gank>>> getGank(int page);
+    @GET("data/{type}/10/{page}")
+    Observable<Result<List<Gank>>> getGank(@Path("type") String type, @Path("page") int page);
 }

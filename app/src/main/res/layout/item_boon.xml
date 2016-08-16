@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="viewModel"
-            type="gank.sin.me.gk.ui.main.MainViewModel"/>
+            type="gank.sin.me.gk.ui.fragments.boon.BoonItemViewModel"/>
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_boon"
         android:orientation="vertical">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/img"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            fresco:placeholderImage="@mipmap/ic_launcher"
+            android:layout_height="wrap_content"
+            fresco:viewAspectRatio="0.618"
             fresco:failureImage="@mipmap/ic_launcher"
-            fresco:imageUri="@{viewModel.getUrl}"
+            fresco:placeholderImage="@mipmap/ic_launcher"
             />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/publish_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:gravity="right"
+            android:text="@{viewModel.publishedAt}"
+            android:textColor="@color/gold"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/_8dp"
+            android:textSize="@dimen/_16sp"
+            tools:text="2016-08-10"/>
+    </FrameLayout>
 </layout>

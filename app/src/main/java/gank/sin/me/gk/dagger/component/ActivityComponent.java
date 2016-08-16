@@ -13,7 +13,7 @@ import gank.sin.me.gk.ui.web.WebActivity;
 @Subcomponent(modules = ActivityModule.class)
 public interface ActivityComponent {
 
-//    void inject(MainActivity mainActivity);
+    void inject(MainActivity mainActivity);
 
     void inject(SearchActivity searchActivity);
 

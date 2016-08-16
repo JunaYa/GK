@@ -14,7 +14,7 @@ import gank.sin.me.gk.dagger.module.FragmentModule;
 public class BaseFragment extends Fragment {
     private FragmentComponent mFragmentComponent;
 
-    protected FragmentComponent getFragmentComponent() {
+    protected FragmentComponent getComponent() {
         if (mFragmentComponent == null)
             mFragmentComponent = ((BaseActivity)getActivity()).getComponent()
                     .plus(new FragmentModule());
