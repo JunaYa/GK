@@ -4,7 +4,6 @@ import java.util.List;
 
 import gank.sin.me.gk.data.model.Gank;
 import gank.sin.me.gk.data.model.History;
-import gank.sin.me.gk.data.model.Search;
 import gank.sin.me.gk.data.model.Result;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -22,7 +21,7 @@ public interface GankApi {
      * @return
      */
     @GET("search/query/{query}/category/{type}/count/30/page/{page}")
-    Observable<Result<List<Search>>> getSearch(
+    Observable<Result<List<Gank>>> getSearch(
             @Path("query") String query,
             @Path("type") String type
             , @Path("page") int page);

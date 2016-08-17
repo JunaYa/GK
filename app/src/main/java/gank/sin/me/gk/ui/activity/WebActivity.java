@@ -1,10 +1,12 @@
-package gank.sin.me.gk.ui.web;
+package gank.sin.me.gk.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -15,6 +17,7 @@ import gank.sin.me.gk.R;
 import gank.sin.me.gk.common.Const;
 import gank.sin.me.gk.databinding.ActivityWebActivityBinding;
 import gank.sin.me.gk.ui.base.BaseActivity;
+import gank.sin.me.gk.ui.viewModel.WebViewModel;
 
 public class WebActivity extends BaseActivity {
 
@@ -60,6 +63,29 @@ public class WebActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_web, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.action_share){
+            share();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void share() {
+        String title = mWebViewModel.getTitle();
+        String url = mWebViewModel.getUrl();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share, title, url));
+        intent.setType("text/plain");
+        startActivity(Intent.createChooser(intent, getString(R.string.action_share)));
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (keyCode) {
@@ -89,5 +115,6 @@ public class WebActivity extends BaseActivity {
             setTitle(title);
         }
     }
+
 
 }

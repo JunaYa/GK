@@ -1,4 +1,4 @@
-package gank.sin.me.gk.ui.search;
+package gank.sin.me.gk.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +17,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import gank.sin.me.gk.R;
+import gank.sin.me.gk.data.model.Gank;
 import gank.sin.me.gk.data.model.Result;
-import gank.sin.me.gk.data.model.Search;
 import gank.sin.me.gk.data.remote.GankApi;
 import gank.sin.me.gk.databinding.ActivitySearchBinding;
 import gank.sin.me.gk.ui.base.BaseActivity;
+import gank.sin.me.gk.ui.adapter.GankAdapter;
+import gank.sin.me.gk.ui.viewModel.SearchViewModel;
 import gank.sin.me.gk.widget.InsertDecoration;
-import rx.SingleSubscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -34,11 +34,11 @@ public class SearchActivity extends BaseActivity {
     private ActivitySearchBinding mBinding;
     @Inject SearchViewModel mSearchViewModel;
     @Inject LinearLayoutManager mLinearLayoutManager;
-    @Inject SearchAdapter mAdapter;
+    @Inject GankAdapter mAdapter;
     @Inject GankApi mGankApi;
 
     private String mType = "all";
-    private List<Search> mSearchList = new ArrayList<>();
+    private List<Gank> mSearchList = new ArrayList<>();
     private int mPage = 1;
     private int lastVisibleItem;
 
@@ -80,7 +80,7 @@ public class SearchActivity extends BaseActivity {
                         return;
                     } else {
                         mPage += 1;
-                        mAdapter.showMore();
+                        mAdapter.onShowMore();
                         getData(mBinding.search.getText().toString().trim(), mType);
                     }
                 }
@@ -106,6 +106,10 @@ public class SearchActivity extends BaseActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_search:
+                if (getCurrentFocus() != null) {
+                    ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+                mBinding.refresh.setRefreshing(true);
                 getData(mBinding.search.getText().toString().trim(), mType);
                 break;
 
@@ -118,9 +122,9 @@ public class SearchActivity extends BaseActivity {
         mGankApi.getSearch(query, type, mPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Result<List<Search>>>() {
+                .subscribe(new Action1<Result<List<Gank>>>() {
                     @Override
-                    public void call(Result<List<Search>> value) {
+                    public void call(Result<List<Gank>> value) {
                         onLoadFinish();
                         if (!value.error) {
                             if (value.results.size() == 0) {
@@ -139,11 +143,11 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void onShowNoMore() {
-        mAdapter.showNoMore();
+        mAdapter.onShowNoMore();
         mBinding.refresh.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mAdapter.hide();
+                mAdapter.onHide();
             }
         }, 500);
     }
@@ -153,7 +157,7 @@ public class SearchActivity extends BaseActivity {
         mBinding.refresh.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mAdapter.hide();
+                mAdapter.onHide();
             }
         }, 500);
     }

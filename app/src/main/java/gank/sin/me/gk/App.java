@@ -5,7 +5,6 @@ import android.app.Application;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.imagepipeline.core.ImagePipelineFactory;
 
 import gank.sin.me.gk.dagger.component.ApplicationComponent;
 import gank.sin.me.gk.dagger.component.DaggerApplicationComponent;

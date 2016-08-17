@@ -1,36 +1,19 @@
 package gank.sin.me.gk.data.model;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Created by sin on 2016/8/5.
  */
 public class Gank {
 
+    @Expose private String desc;
+    @Expose private String publishedAt;
+    @Expose private String source;
+    @Expose private String type;
+    @Expose private String url;
+    @Expose private String who;
 
-    private String _id;
-    private String createdAt;
-    private String desc;
-    private String publishedAt;
-    private String source;
-    private String type;
-    private String url;
-    private boolean used;
-    private String who;
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
 
     public String getDesc() {
         return desc;
@@ -70,14 +53,6 @@ public class Gank {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public boolean isUsed() {
-        return used;
-    }
-
-    public void setUsed(boolean used) {
-        this.used = used;
     }
 
     public String getWho() {

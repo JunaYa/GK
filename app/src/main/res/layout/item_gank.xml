@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="gank.sin.me.gk.ui.fragments.boon.BoonItemViewModel"/>
+            type="gank.sin.me.gk.ui.viewModel.GankItemViewModel"/>
     </data>
 
     <LinearLayout
@@ -17,7 +17,8 @@
         android:orientation="vertical"
         android:clickable="true"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:background="@drawable/bg_item_search">
+        android:onClick="@{viewModel.onWeb}"
+        android:background="@drawable/bg_item_gank">
 
 
         <TextView

@@ -15,8 +15,8 @@ import dagger.Provides;
 import gank.sin.me.gk.dagger.ActivityContext;
 import gank.sin.me.gk.ui.base.BaseActivity;
 import gank.sin.me.gk.ui.base.BaseFragment;
-import gank.sin.me.gk.ui.fragments.boon.BoonFragment;
-import gank.sin.me.gk.ui.fragments.empty.EmptyFragment;
+import gank.sin.me.gk.ui.fragments.BoonFragment;
+import gank.sin.me.gk.ui.fragments.EmptyFragment;
 
 /**
  * Created by qoo on 16-8-5.

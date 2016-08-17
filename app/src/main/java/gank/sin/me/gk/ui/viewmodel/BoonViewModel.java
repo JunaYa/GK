@@ -1,4 +1,4 @@
-package gank.sin.me.gk.ui.fragments.boon;
+package gank.sin.me.gk.ui.viewModel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import gank.sin.me.gk.data.model.Gank;
+import gank.sin.me.gk.ui.adapter.GankAdapter;
 
 /**
  * Created by sin on 2016/8/15.

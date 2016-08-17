@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="gank.sin.me.gk.ui.fragments.boon.BoonViewModel"/>
+            type="gank.sin.me.gk.ui.viewModel.BoonViewModel"/>
     </data>
 
     <FrameLayout

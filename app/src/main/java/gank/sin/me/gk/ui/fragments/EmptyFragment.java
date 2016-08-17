@@ -1,4 +1,4 @@
-package gank.sin.me.gk.ui.fragments.empty;
+package gank.sin.me.gk.ui.fragments;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;

@@ -15,4 +15,7 @@
     <string name="layout_grid">grid</string>
     <string name="layout_linear">linear</string>
     <string name="empty">没有内容</string>
+    <string name="action_share">action_share</string>
+
+    <string name="share">translatable="false">「%1$s%2$1s (分享自 @Gank)</string>
 </resources>

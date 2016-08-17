@@ -1,18 +1,14 @@
-package gank.sin.me.gk.ui.main;
+package gank.sin.me.gk.ui.viewModel;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-import android.util.Log;
 import android.view.View;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 
 import gank.sin.me.gk.dagger.ActivityContext;
-import gank.sin.me.gk.data.model.Gank;
-import gank.sin.me.gk.data.remote.GankApi;
-import gank.sin.me.gk.ui.search.SearchActivity;
+import gank.sin.me.gk.ui.activity.SearchActivity;
 
 /**
  * Created by sin on 2016/8/8.
@@ -28,7 +24,6 @@ public class MainViewModel extends BaseObservable {
     }
 
     public void onClickFab(View view) {
-        Log.d("dfsafdsafdsaf", "fdsafdsafdsa");
         mContext.get().startActivity(SearchActivity.newIntent(mContext.get()));
     }
 

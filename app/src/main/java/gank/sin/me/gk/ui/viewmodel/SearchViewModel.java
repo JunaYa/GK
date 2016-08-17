@@ -1,12 +1,10 @@
-package gank.sin.me.gk.ui.search;
+package gank.sin.me.gk.ui.viewModel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
-import android.view.View;
 
 import java.util.ArrayList;
 
@@ -14,7 +12,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-import gank.sin.me.gk.data.model.Search;
+import gank.sin.me.gk.data.model.Gank;
+import gank.sin.me.gk.ui.adapter.GankAdapter;
 
 
 /**
@@ -24,10 +23,10 @@ import gank.sin.me.gk.data.model.Search;
 public class SearchViewModel extends BaseObservable {
     Provider<LinearLayoutManager> mLinearProvider;
     Provider<StaggeredGridLayoutManager> mGridProvider;
-    SearchAdapter mAdapter;
+    GankAdapter mAdapter;
 
     @Inject
-    public SearchViewModel(Provider<LinearLayoutManager> linear, @Named("grid_two") Provider<StaggeredGridLayoutManager> grid, SearchAdapter gankAdapter) {
+    public SearchViewModel(Provider<LinearLayoutManager> linear, @Named("grid_two") Provider<StaggeredGridLayoutManager> grid, GankAdapter gankAdapter) {
         mLinearProvider = linear;
         mGridProvider = grid;
         mAdapter = gankAdapter;
@@ -43,7 +42,7 @@ public class SearchViewModel extends BaseObservable {
         return mGridProvider.get();
     }
 
-    public void setItems(ArrayList<Search> searches) {
+    public void setItems(ArrayList<Gank> searches) {
         this.mAdapter.setGanks(searches);
         notifyChange();
     }

@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="gank.sin.me.gk.ui.search.SearchViewModel"/>
+            type="gank.sin.me.gk.ui.viewModel.SearchViewModel"/>
 
     </data>
 
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="gank.sin.me.gk.ui.search.SearchActivity">
+        tools:context="gank.sin.me.gk.ui.activity.SearchActivity">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"

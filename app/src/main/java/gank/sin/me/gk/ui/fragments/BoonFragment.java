@@ -1,4 +1,4 @@
-package gank.sin.me.gk.ui.fragments.boon;
+package gank.sin.me.gk.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +20,9 @@ import gank.sin.me.gk.data.model.Gank;
 import gank.sin.me.gk.data.model.Result;
 import gank.sin.me.gk.data.remote.GankApi;
 import gank.sin.me.gk.databinding.FragmentBoonBinding;
+import gank.sin.me.gk.ui.adapter.GankAdapter;
 import gank.sin.me.gk.ui.base.BaseFragment;
+import gank.sin.me.gk.ui.viewModel.BoonViewModel;
 import gank.sin.me.gk.widget.InsertDecoration;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;

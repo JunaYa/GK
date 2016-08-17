@@ -1,4 +1,4 @@
-package gank.sin.me.gk.ui.main;
+package gank.sin.me.gk.ui.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -20,7 +20,8 @@ import gank.sin.me.gk.data.remote.GankApi;
 import gank.sin.me.gk.databinding.ActivityMainBinding;
 import gank.sin.me.gk.ui.base.BaseActivity;
 import gank.sin.me.gk.ui.base.BaseFragment;
-import gank.sin.me.gk.ui.fragments.boon.BoonFragment;
+import gank.sin.me.gk.ui.fragments.BoonFragment;
+import gank.sin.me.gk.ui.viewModel.MainViewModel;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -97,7 +98,7 @@ public class MainActivity extends BaseActivity
                 }
                 break;
             case R.id.action_search:
-
+                startActivity(SearchActivity.newIntent(this));
                 break;
         }
 
