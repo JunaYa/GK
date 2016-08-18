@@ -39,9 +39,7 @@ public class BoonFragment extends BaseFragment {
     private int mPage;
     private String mType;
     private int mLastVisibleItem;
-    private List<Gank> mGanks = new ArrayList<>();
     @Inject GankApi mGankApi;
-    @Inject GankAdapter mAdapter;
     @Inject BoonViewModel mBoonViewModel;
 
     @Override
@@ -62,6 +60,7 @@ public class BoonFragment extends BaseFragment {
         mBinding.refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                mBoonViewModel.refresh();
                 mPage = 1;
                 getData(mType, mPage);
             }
@@ -71,16 +70,20 @@ public class BoonFragment extends BaseFragment {
         if (mBinding.recycler.getLayoutManager() == null) {
             mBinding.recycler.addItemDecoration(new InsertDecoration(getActivity()));
         }
-        mBinding.recycler.setAdapter(mAdapter);
+        mBinding.recycler.setAdapter(mBoonViewModel.getAdapter());
         mBinding.recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && mLastVisibleItem + 1 == mAdapter.getItemCount()) {
-                    mAdapter.onShowMore();
-                    mPage += 1;
-                    getData(mType, mPage);
+                        && mLastVisibleItem + 1 == mBoonViewModel.getAdapter().getItemCount()) {
+                    if (mBoonViewModel.isEmpty()) {
+                        showNoMore();
+                    } else {
+                        mBoonViewModel.getAdapter().onShowMore();
+                        mPage += 1;
+                        getData(mType, mPage);
+                    }
                 }
             }
 
@@ -110,7 +113,7 @@ public class BoonFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mGanks.size() == 0 && !mBinding.refresh.isRefreshing()) {
+        if (mBoonViewModel.isEmpty() && !mBinding.refresh.isRefreshing()) {
             mBinding.refresh.post(new Runnable() {
                 @Override
                 public void run() {
@@ -123,10 +126,13 @@ public class BoonFragment extends BaseFragment {
 
     public void initRecycler(RecyclerView.LayoutManager layoutManager) {
         mBinding.recycler.setLayoutManager(layoutManager);
-        mAdapter.notifyDataSetChanged();
+        mBoonViewModel.getAdapter().notifyDataSetChanged();
     }
 
     public void getData(String type, int page) {
+        if (mType != null && !mType.equals(type)) {
+            mBoonViewModel.refresh();
+        }
         mType = type;
         mPage = page;
         mGankApi.getGank(type, page)
@@ -136,18 +142,11 @@ public class BoonFragment extends BaseFragment {
                     @Override
                     public void call(Result<List<Gank>> listResult) {
                         mBinding.refresh.setRefreshing(false);
-
-                        if (mPage == 1) {
-                            mGanks.clear();
-                        } else {
-                            hide();
-                        }
+                        hide();
                         if (!listResult.error) {
-                            mGanks.addAll(listResult.results);
-                            mAdapter.setGanks(mGanks);
-                            mBoonViewModel.setGanks(mGanks);
-                            if (mPage > 1 && listResult.results.size() == 0) showNoMore();
+                            mBoonViewModel.setGanks(listResult.results);
                         }
+
                     }
                 }, new Action1<Throwable>() {
                     @Override
@@ -159,15 +158,15 @@ public class BoonFragment extends BaseFragment {
     }
 
     private void showNoMore() {
-        mAdapter.onShowNoMore();
+        mBoonViewModel.getAdapter().onShowNoMore();
         hide();
     }
 
-    private void hide(){
+    private void hide() {
         mBinding.refresh.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mAdapter.onHide();
+                mBoonViewModel.getAdapter().onHide();
             }
         }, 500);
     }

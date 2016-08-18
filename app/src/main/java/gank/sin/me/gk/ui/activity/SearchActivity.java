@@ -34,11 +34,9 @@ public class SearchActivity extends BaseActivity {
     private ActivitySearchBinding mBinding;
     @Inject SearchViewModel mSearchViewModel;
     @Inject LinearLayoutManager mLinearLayoutManager;
-    @Inject GankAdapter mAdapter;
     @Inject GankApi mGankApi;
 
     private String mType = "all";
-    private List<Gank> mSearchList = new ArrayList<>();
     private int mPage = 1;
     private int lastVisibleItem;
 
@@ -59,7 +57,7 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onRefresh() {
                 mPage = 1;
-                mSearchList.clear();
+                mSearchViewModel.refresh();
                 getData(mBinding.search.getText().toString().trim(), mType);
             }
         });
@@ -68,19 +66,21 @@ public class SearchActivity extends BaseActivity {
             mBinding.recycler.setLayoutManager(mLinearLayoutManager);
             mBinding.recycler.addItemDecoration(new InsertDecoration(this));
         }
-        mBinding.recycler.setAdapter(mAdapter);
+        mBinding.recycler.setAdapter(mSearchViewModel.getAdapter());
         mBinding.recycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && lastVisibleItem + 1 == mAdapter.getItemCount()) {
-                    if (mAdapter.isLoad()) {
+                        && lastVisibleItem + 1 == mSearchViewModel.getAdapter().getItemCount()) {
+                    if (mSearchViewModel.getAdapter().isLoad()) {
                         return;
-                    } else {
+                    } else if (mSearchViewModel.isEmpty()){
+                        onShowNoMore();
+                    }else {
                         mPage += 1;
-                        mAdapter.onShowMore();
+                        mSearchViewModel.getAdapter().onShowMore();
                         getData(mBinding.search.getText().toString().trim(), mType);
                     }
                 }
@@ -130,8 +130,7 @@ public class SearchActivity extends BaseActivity {
                             if (value.results.size() == 0) {
                                 onShowNoMore();
                             }
-                            mSearchList.addAll(value.results);
-                            mAdapter.setGanks(mSearchList);
+                            mSearchViewModel.setGanks(value.results);
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -143,11 +142,11 @@ public class SearchActivity extends BaseActivity {
     }
 
     private void onShowNoMore() {
-        mAdapter.onShowNoMore();
+        mSearchViewModel.getAdapter().onShowNoMore();
         mBinding.refresh.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mAdapter.onHide();
+                mSearchViewModel.getAdapter().onHide();
             }
         }, 500);
     }
@@ -157,7 +156,7 @@ public class SearchActivity extends BaseActivity {
         mBinding.refresh.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mAdapter.onHide();
+                mSearchViewModel.getAdapter().onHide();
             }
         }, 500);
     }

@@ -22,8 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             fresco:viewAspectRatio="0.618"
-            fresco:failureImage="@mipmap/ic_launcher"
-            fresco:placeholderImage="@mipmap/ic_launcher"
             />
 
         <TextView
