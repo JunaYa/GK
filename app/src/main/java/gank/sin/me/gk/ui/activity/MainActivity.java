@@ -30,7 +30,6 @@ public class MainActivity extends BaseActivity
     @Inject LinearLayoutManager mLinearLayoutManager;
     @Inject @Named("grid_two") StaggeredGridLayoutManager mGridLayoutManager;
     @Inject MainViewModel mMainViewModel;
-    @Inject GankApi mGankApi;
     @Inject @Named("fragments") ArrayList<BaseFragment> mFragments;
 
     @Override

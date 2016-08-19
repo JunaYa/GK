@@ -14,6 +14,7 @@ import javax.inject.Provider;
 
 import gank.sin.me.gk.BR;
 import gank.sin.me.gk.data.model.Gank;
+import gank.sin.me.gk.db.GankDB;
 import gank.sin.me.gk.ui.adapter.GankAdapter;
 
 /**
@@ -26,6 +27,7 @@ public class BoonViewModel extends BaseObservable {
     private GankAdapter mGankAdapter;
     private List<Gank> mGanks = new ArrayList<>();
     private boolean mIsEmpty;
+    @Inject GankDB mGankDB;
 
     @Inject
     public BoonViewModel(Provider<LinearLayoutManager> linearProvider, GankAdapter gankAdapter) {
@@ -33,17 +35,15 @@ public class BoonViewModel extends BaseObservable {
         mGankAdapter = gankAdapter;
     }
 
-    public void setGanks( List<Gank> list) {
-        mIsEmpty = list!= null && list.size() == 0 ? true : false;
+    public void setGanks(List<Gank> list) {
+        mIsEmpty = list != null && list.size() == 0 ? true : false;
+        for (Gank gank : list)
+            mGankDB.insert(gank);
         mGanks.addAll(list);
         mGankAdapter.setGanks(mGanks);
-////        notifyPropertyChanged(BR._all);
-//        notifyPropertyChanged(BR.desc);
-//        notifyPropertyChanged(BR.who);
-//        notifyPropertyChanged(BR.publishedAt);
     }
 
-    public void refresh(){
+    public void refresh() {
         mGanks.clear();
     }
 

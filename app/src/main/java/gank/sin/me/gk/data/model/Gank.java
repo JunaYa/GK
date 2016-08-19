@@ -7,6 +7,7 @@ import com.google.gson.annotations.Expose;
  */
 public class Gank {
 
+    @Expose private String _id;
     @Expose private String desc;
     @Expose private String publishedAt;
     @Expose private String source;
@@ -14,6 +15,14 @@ public class Gank {
     @Expose private String url;
     @Expose private String who;
 
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public String getDesc() {
         return desc;

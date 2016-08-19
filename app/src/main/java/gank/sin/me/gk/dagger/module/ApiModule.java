@@ -28,12 +28,12 @@ public class ApiModule {
 
     @Provides
     @Named("api_url")
-    String providesApiUrl(Resources resources) {
+    public String providesApiUrl(Resources resources) {
         return resources.getString(R.string.api_url);
     }
 
     @Provides
-    Factory providesConverterFactory() {
+    public Factory providesConverterFactory() {
         GsonBuilder gsonFactory = new GsonBuilder();
         gsonFactory.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         return GsonConverterFactory.create(gsonFactory.create());

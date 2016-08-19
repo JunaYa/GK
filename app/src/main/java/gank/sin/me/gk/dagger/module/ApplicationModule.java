@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import dagger.Module;
 import dagger.Provides;
 import gank.sin.me.gk.dagger.ApplicationContext;
+import gank.sin.me.gk.db.GankDB;
 
 /**
  * Created by qoo on 16-8-5.

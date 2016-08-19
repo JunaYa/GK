@@ -18,4 +18,6 @@
     <string name="action_share">action_share</string>
 
     <string name="share">translatable="false">「%1$s%2$1s (分享自 @Gank)</string>
+    <string name="create_table_gank">create table Gank(_id varchar primary key, desc varchar , publishedAt varchar , source varchar , type varchar , url varchar , who varchar)
+</string>
 </resources>

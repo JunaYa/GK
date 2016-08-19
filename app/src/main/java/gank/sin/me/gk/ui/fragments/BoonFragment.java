@@ -10,8 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.inject.Inject;
 
@@ -20,7 +21,7 @@ import gank.sin.me.gk.data.model.Gank;
 import gank.sin.me.gk.data.model.Result;
 import gank.sin.me.gk.data.remote.GankApi;
 import gank.sin.me.gk.databinding.FragmentBoonBinding;
-import gank.sin.me.gk.ui.adapter.GankAdapter;
+import gank.sin.me.gk.db.GankDB;
 import gank.sin.me.gk.ui.base.BaseFragment;
 import gank.sin.me.gk.ui.viewModel.BoonViewModel;
 import gank.sin.me.gk.widget.InsertDecoration;
@@ -41,7 +42,6 @@ public class BoonFragment extends BaseFragment {
     private int mLastVisibleItem;
     @Inject GankApi mGankApi;
     @Inject BoonViewModel mBoonViewModel;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +135,7 @@ public class BoonFragment extends BaseFragment {
         }
         mType = type;
         mPage = page;
+
         mGankApi.getGank(type, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
