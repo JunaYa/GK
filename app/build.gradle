@@ -4,6 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.1"
 
+
     dataBinding {
         enabled = true
     }
@@ -47,8 +48,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha5'
     testCompile 'junit:junit:4.12'
     provided 'org.glassfish:javax.annotation:10.0-b28'
-    compile project(path: ':common')
 }
