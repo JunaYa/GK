@@ -1,7 +1,10 @@
 package gank.sin.me.gk.ui.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.inject.Inject;
 
@@ -21,9 +22,8 @@ import gank.sin.me.gk.data.model.Gank;
 import gank.sin.me.gk.data.model.Result;
 import gank.sin.me.gk.data.remote.GankApi;
 import gank.sin.me.gk.databinding.FragmentBoonBinding;
-import gank.sin.me.gk.db.GankDB;
 import gank.sin.me.gk.ui.base.BaseFragment;
-import gank.sin.me.gk.ui.viewModel.BoonViewModel;
+import gank.sin.me.gk.ui.viewmodel.BoonViewModel;
 import gank.sin.me.gk.widget.InsertDecoration;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -48,6 +48,7 @@ public class BoonFragment extends BaseFragment {
         getComponent().inject(this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class BoonFragment extends BaseFragment {
         mBinding = FragmentBoonBinding.bind(view);
         mBinding.setViewModel(mBoonViewModel);
 
-        mBinding.refresh.setColorSchemeColors(R.color.colorPrimary);
+        mBinding.refresh.setColorSchemeColors(ContextCompat.getColor(getActivity(),R.color.colorPrimary));
         mBinding.refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

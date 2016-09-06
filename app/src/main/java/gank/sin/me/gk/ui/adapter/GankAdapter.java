@@ -19,7 +19,7 @@ import gank.sin.me.gk.databinding.ItemGankBinding;
 import gank.sin.me.gk.databinding.ViewFootMoreBinding;
 import gank.sin.me.gk.databinding.ViewFootNoMoreBinding;
 import gank.sin.me.gk.ui.base.BindingViewHolder;
-import gank.sin.me.gk.ui.viewModel.GankItemViewModel;
+import gank.sin.me.gk.ui.viewmodel.GankItemViewModel;
 
 /**
  * Created by sin on 2016/8/11.

@@ -1,4 +1,4 @@
-package gank.sin.me.gk.ui.viewModel;
+package gank.sin.me.gk.ui.viewmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
@@ -6,14 +6,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-import gank.sin.me.gk.BR;
 import gank.sin.me.gk.data.model.Gank;
 import gank.sin.me.gk.ui.adapter.GankAdapter;
 

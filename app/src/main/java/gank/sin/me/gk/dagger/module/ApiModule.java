@@ -1,15 +1,22 @@
 package gank.sin.me.gk.dagger.module;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.res.Resources;
 
 import com.google.gson.GsonBuilder;
+
+import java.io.File;
 
 import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
+import gank.sin.me.gk.App;
 import gank.sin.me.gk.R;
+import gank.sin.me.gk.dagger.ApplicationContext;
 import gank.sin.me.gk.data.remote.GankApi;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -25,6 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class ApiModule {
+
 
     @Provides
     @Named("api_url")
@@ -47,8 +55,15 @@ public class ApiModule {
     }
 
     @Provides
-    public OkHttpClient providesHttpClient(HttpLoggingInterceptor loggingInterceptor) {
-        return new Builder().addInterceptor(loggingInterceptor).build();
+    public Cache providesCache(Application application){
+         final int DEFAULT_CACHE_SIZE = (10* 1024 * 1024);
+        final File httpCacheDirectory = new File(application.getCacheDir(), "Gank");
+        return new Cache(httpCacheDirectory,DEFAULT_CACHE_SIZE);
+    }
+
+    @Provides
+    public OkHttpClient providesHttpClient(HttpLoggingInterceptor loggingInterceptor, Cache cache) {
+        return new Builder().addInterceptor(loggingInterceptor).cache(cache).build();
     }
 
     @Provides

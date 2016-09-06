@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="gank.sin.me.gk.ui.viewModel.BoonViewModel"/>
+            type="gank.sin.me.gk.ui.viewmodel.BoonViewModel"/>
     </data>
 
     <FrameLayout

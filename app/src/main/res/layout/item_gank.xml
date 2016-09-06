@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="gank.sin.me.gk.ui.viewModel.GankItemViewModel"/>
+            type="gank.sin.me.gk.ui.viewmodel.GankItemViewModel"/>
     </data>
 
     <LinearLayout

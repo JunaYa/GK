@@ -1,4 +1,4 @@
-package gank.sin.me.gk.ui.viewModel;
+package gank.sin.me.gk.ui.viewmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

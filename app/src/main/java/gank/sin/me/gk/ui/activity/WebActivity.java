@@ -17,7 +17,7 @@ import gank.sin.me.gk.R;
 import gank.sin.me.gk.common.Const;
 import gank.sin.me.gk.databinding.ActivityWebActivityBinding;
 import gank.sin.me.gk.ui.base.BaseActivity;
-import gank.sin.me.gk.ui.viewModel.WebViewModel;
+import gank.sin.me.gk.ui.viewmodel.WebViewModel;
 
 public class WebActivity extends BaseActivity {
 

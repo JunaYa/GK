@@ -1,8 +1,9 @@
-package gank.sin.me.gk.ui.viewModel;
+package gank.sin.me.gk.ui.viewmodel;
 
 import android.content.Context;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import javax.inject.Inject;
@@ -21,9 +22,11 @@ public class GankItemViewModel extends BaseObservable {
 
     private Gank mGank;
     private Provider<Context> mContext;
+    private Provider<LinearLayoutManager> layoutManagerProvider;
 
     @Inject
-    public GankItemViewModel(@ActivityContext Provider<Context>context) {
+    public GankItemViewModel(Provider<LinearLayoutManager> provider,@ActivityContext Provider<Context>context) {
+        layoutManagerProvider = provider;
         mContext = context;
     }
 
@@ -64,6 +67,10 @@ public class GankItemViewModel extends BaseObservable {
         return mGank.getWho();
     }
 
+    @Bindable
+    public LinearLayoutManager getLinearLayoutManager(){
+        return layoutManagerProvider.get();
+    }
     public void onWeb(View view){
         mContext.get().startActivity(WebActivity.newIntent(mContext.get(),mGank.getDesc(),mGank.getUrl()));
     }

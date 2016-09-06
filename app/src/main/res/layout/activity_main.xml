@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="gank.sin.me.gk.ui.viewModel.MainViewModel"/>
+            type="gank.sin.me.gk.ui.viewmodel.MainViewModel"/>
     </data>
 
     <android.support.v4.widget.DrawerLayout

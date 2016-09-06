@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,19 +14,16 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import gank.sin.me.gk.R;
-import gank.sin.me.gk.data.remote.GankApi;
 import gank.sin.me.gk.databinding.ActivityMainBinding;
 import gank.sin.me.gk.ui.base.BaseActivity;
 import gank.sin.me.gk.ui.base.BaseFragment;
 import gank.sin.me.gk.ui.fragments.BoonFragment;
-import gank.sin.me.gk.ui.viewModel.MainViewModel;
+import gank.sin.me.gk.ui.viewmodel.MainViewModel;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ActivityMainBinding mBinding;
-    @Inject LinearLayoutManager mLinearLayoutManager;
-    @Inject @Named("grid_two") StaggeredGridLayoutManager mGridLayoutManager;
     @Inject MainViewModel mMainViewModel;
     @Inject @Named("fragments") ArrayList<BaseFragment> mFragments;
 
@@ -53,7 +48,7 @@ public class MainActivity extends BaseActivity
     protected void onResume() {
         super.onResume();
         initNav();
-        getBoonFragment().initRecycler(mLinearLayoutManager);
+        getBoonFragment().initRecycler(mMainViewModel.getLinearLayoutManager());
     }
 
 
@@ -89,11 +84,11 @@ public class MainActivity extends BaseActivity
                 if (menuTitle.equals(linear)){
                     item.setTitle(grid);
                     item.setIcon(R.drawable.ic_menu_grid);
-                    getBoonFragment().initRecycler(mLinearLayoutManager);
+                    getBoonFragment().initRecycler(mMainViewModel.getLinearLayoutManager());
                 }else if (menuTitle.equals(grid)){
                     item.setTitle(linear);
                     item.setIcon(R.drawable.ic_menu_linear);
-                    getBoonFragment().initRecycler(mGridLayoutManager);
+                    getBoonFragment().initRecycler(mMainViewModel.getGridLayoutManager());
                 }
                 break;
             case R.id.action_search:
