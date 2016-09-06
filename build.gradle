@@ -27,7 +27,6 @@ ext {
     supportVersion = '24.0.0-beta1'
     daggerVersion = '2.6'
     OkHttpVersion = '3.4.1'
-    sqlbriteVersion = '0.7.0'
     retrofitVersion = '2.1.0'
     rxandroidVersion = '1.2.0'
     rxjavaVersion = '1.1.5'
