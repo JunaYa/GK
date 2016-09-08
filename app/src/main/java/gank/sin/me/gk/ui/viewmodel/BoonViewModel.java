@@ -2,9 +2,7 @@ package gank.sin.me.gk.ui.viewModel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import gank.sin.me.gk.BR;
 import gank.sin.me.gk.data.model.Gank;
-import gank.sin.me.gk.db.GankDB;
 import gank.sin.me.gk.ui.adapter.GankAdapter;
 
 /**
@@ -27,7 +23,7 @@ public class BoonViewModel extends BaseObservable {
     private GankAdapter mGankAdapter;
     private List<Gank> mGanks = new ArrayList<>();
     private boolean mIsEmpty;
-    @Inject GankDB mGankDB;
+
 
     @Inject
     public BoonViewModel(Provider<LinearLayoutManager> linearProvider, GankAdapter gankAdapter) {
@@ -37,8 +33,8 @@ public class BoonViewModel extends BaseObservable {
 
     public void setGanks(List<Gank> list) {
         mIsEmpty = list != null && list.size() == 0 ? true : false;
-        for (Gank gank : list)
-            mGankDB.insert(gank);
+//        for (Gank gank : list)
+//            mGankDB.insert(gank);
         mGanks.addAll(list);
         mGankAdapter.setGanks(mGanks);
     }

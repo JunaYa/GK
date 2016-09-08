@@ -21,4 +21,5 @@ import gank.sin.me.gk.dagger.module.DBModule;
 })
 public interface ApplicationComponent {
     ActivityComponent plus(ActivityModule activityModule);
+
 }

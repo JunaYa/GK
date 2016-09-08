@@ -22,7 +22,7 @@ public class GankDB {
     }
 
     public boolean insert(Gank gank){
-        BaseSQLiteHelper helper  =  new BaseSQLiteHelper(mContext);
+        OpenHelper helper  =  new OpenHelper(mContext);
         SQLiteDatabase db = helper.getReadableDatabase();
 
         db.beginTransaction();
@@ -51,7 +51,7 @@ public class GankDB {
 
     public List<Gank> query(String type, int page){
         List<Gank> ganks = null;
-        BaseSQLiteHelper helper = new BaseSQLiteHelper(mContext);
+        OpenHelper helper = new OpenHelper(mContext);
         SQLiteDatabase db = helper.getReadableDatabase();
         db.beginTransaction();
         try {
@@ -88,7 +88,7 @@ public class GankDB {
     }
 
     public boolean delete(Gank gank){
-        BaseSQLiteHelper helper = new BaseSQLiteHelper(mContext);
+        OpenHelper helper = new OpenHelper(mContext);
         SQLiteDatabase db = helper.getReadableDatabase();
         db.beginTransaction();
         try {
@@ -106,7 +106,7 @@ public class GankDB {
     }
 
     public boolean clearGanks(){
-        BaseSQLiteHelper helper = new BaseSQLiteHelper(mContext);
+        OpenHelper helper = new OpenHelper(mContext);
         SQLiteDatabase db = helper.getReadableDatabase();
         db.beginTransaction();
         try {

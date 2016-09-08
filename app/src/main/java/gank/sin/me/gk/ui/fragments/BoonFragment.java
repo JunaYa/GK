@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.inject.Inject;
 
@@ -21,13 +19,19 @@ import gank.sin.me.gk.data.model.Gank;
 import gank.sin.me.gk.data.model.Result;
 import gank.sin.me.gk.data.remote.GankApi;
 import gank.sin.me.gk.databinding.FragmentBoonBinding;
+import gank.sin.me.gk.db.DataManager;
 import gank.sin.me.gk.db.GankDB;
 import gank.sin.me.gk.ui.base.BaseFragment;
 import gank.sin.me.gk.ui.viewModel.BoonViewModel;
 import gank.sin.me.gk.widget.InsertDecoration;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import rx.subjects.Subject;
 
 /**
  * Created by sin on 2016/8/11.
@@ -40,8 +44,13 @@ public class BoonFragment extends BaseFragment {
     private int mPage;
     private String mType;
     private int mLastVisibleItem;
-    @Inject GankApi mGankApi;
-    @Inject BoonViewModel mBoonViewModel;
+    @Inject
+    GankApi mGankApi;
+    @Inject
+    DataManager mDataManager;
+    @Inject
+    BoonViewModel mBoonViewModel;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +65,7 @@ public class BoonFragment extends BaseFragment {
         mBinding = FragmentBoonBinding.bind(view);
         mBinding.setViewModel(mBoonViewModel);
 
-        mBinding.refresh.setColorSchemeColors(R.color.colorPrimary);
+        mBinding.refresh.setColorSchemeResources(R.color.colorPrimary);
         mBinding.refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -136,24 +145,41 @@ public class BoonFragment extends BaseFragment {
         mType = type;
         mPage = page;
 
-        mGankApi.getGank(type, page)
+        Observable<List<Gank>> network = mGankApi.getGank(type, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Result<List<Gank>>>() {
+                .switchMap(new Func1<Result<List<Gank>>, Observable<? extends List<Gank>>>() {
                     @Override
-                    public void call(Result<List<Gank>> listResult) {
-                        mBinding.refresh.setRefreshing(false);
-                        hide();
-                        if (!listResult.error) {
-                            mBoonViewModel.setGanks(listResult.results);
+                    public Observable<List<Gank>> call(Result<List<Gank>> listResult) {
+                        if (!listResult.error){
+                            return Observable.just(listResult.results);
                         }
-
+                        return null;
                     }
-                }, new Action1<Throwable>() {
+                });
+
+        Observable.concat(mDataManager.getGanks(type, page), network)
+                .first()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<Gank>>() {
                     @Override
-                    public void call(Throwable throwable) {
+                    public void onCompleted() {
                         mBinding.refresh.setRefreshing(false);
                         hide();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mBinding.refresh.setRefreshing(false);
+                        hide();
+                    }
+
+                    @Override
+                    public void onNext(List<Gank> ganks) {
+                        mBinding.refresh.setRefreshing(false);
+                        hide();
+                        mBoonViewModel.setGanks(ganks);
                     }
                 });
     }

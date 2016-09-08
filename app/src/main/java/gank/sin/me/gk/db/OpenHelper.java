@@ -10,12 +10,12 @@ import gank.sin.me.gk.R;
  * Created by sin on 2016/8/19.
  */
 
-public class BaseSQLiteHelper extends SQLiteOpenHelper {
+public class OpenHelper extends SQLiteOpenHelper {
 
     private Context mContext;
 
-    public BaseSQLiteHelper(Context context) {
-        super(context, "Gank.db", null, 1);
+    public OpenHelper(Context context) {
+        super(context, "Gank.db", null/* factory */, Db.VERSION);
         mContext = context;
     }
 

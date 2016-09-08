@@ -37,6 +37,8 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     compile "com.squareup.okhttp3:okhttp:$rootProject.OkHttpVersion"
     compile "com.squareup.okhttp3:logging-interceptor:$rootProject.OkHttpVersion"
+    compile "com.squareup.sqlbrite:sqlbrite:$rootProject.sqlbriteVersion"
+    compile "com.google.auto.value:auto-value:$rootProject.autoValueVersion"
     //rx dependencies
     compile "io.reactivex:rxandroid:$rootProject.rxandroidVersion"
     compile "io.reactivex:rxjava:$rootProject.rxjavaVersion"
