@@ -46,7 +46,6 @@ public class GankAdapter extends RecyclerView.Adapter<BindingViewHolder> {
 
     public void setGanks(List<Gank> ganks) {
         mGanks = ganks;
-        notifyDataSetChanged();
     }
 
     public boolean isLoad(){
@@ -98,7 +97,7 @@ public class GankAdapter extends RecyclerView.Adapter<BindingViewHolder> {
             GankItemViewModel model = mProviderGank.get();
             model.setGank(mGanks.get(position));
             binding.setViewModel(model);
-            Uri uri = Uri.parse(model.getUrl());
+            Uri uri = Uri.parse(model.getUrl()+"?imageView2/0/w/100");
             binding.img.setImageURI(uri);
         } else {
             ItemGankBinding binding = (ItemGankBinding) holder.getBinding();

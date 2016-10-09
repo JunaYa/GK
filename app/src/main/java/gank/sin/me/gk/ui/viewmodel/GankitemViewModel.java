@@ -6,6 +6,7 @@ import android.databinding.Bindable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -25,7 +26,7 @@ public class GankItemViewModel extends BaseObservable {
     private Provider<LinearLayoutManager> layoutManagerProvider;
 
     @Inject
-    public GankItemViewModel(Provider<LinearLayoutManager> provider,@ActivityContext Provider<Context>context) {
+    public GankItemViewModel(Provider<LinearLayoutManager> provider, @ActivityContext Provider<Context>context) {
         layoutManagerProvider = provider;
         mContext = context;
     }
@@ -71,7 +72,11 @@ public class GankItemViewModel extends BaseObservable {
     public LinearLayoutManager getLinearLayoutManager(){
         return layoutManagerProvider.get();
     }
+
+
     public void onWeb(View view){
         mContext.get().startActivity(WebActivity.newIntent(mContext.get(),mGank.getDesc(),mGank.getUrl()));
     }
+
+
 }

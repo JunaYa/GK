@@ -28,6 +28,7 @@ public class App extends Application {
         return mApplicationComponent;
     }
 
+    //初始化 Fresco
     private void initFresco() {
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();

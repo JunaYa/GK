@@ -22,6 +22,7 @@ import gank.sin.me.gk.data.model.Gank;
 import gank.sin.me.gk.data.model.Result;
 import gank.sin.me.gk.data.remote.GankApi;
 import gank.sin.me.gk.databinding.FragmentBoonBinding;
+import gank.sin.me.gk.db.GankDB;
 import gank.sin.me.gk.ui.base.BaseFragment;
 import gank.sin.me.gk.ui.viewmodel.BoonViewModel;
 import gank.sin.me.gk.widget.InsertDecoration;
@@ -40,6 +41,7 @@ public class BoonFragment extends BaseFragment {
     private int mPage;
     private String mType;
     private int mLastVisibleItem;
+
     @Inject GankApi mGankApi;
     @Inject BoonViewModel mBoonViewModel;
     @Override
@@ -113,6 +115,8 @@ public class BoonFragment extends BaseFragment {
 
     @Override
     public void onResume() {
+
+
         super.onResume();
         if (mBoonViewModel.isEmpty() && !mBinding.refresh.isRefreshing()) {
             mBinding.refresh.post(new Runnable() {
@@ -136,6 +140,9 @@ public class BoonFragment extends BaseFragment {
         }
         mType = type;
         mPage = page;
+
+        GankDB mGankDb = new GankDB(getActivity());
+        List<Gank> localGanks = mGankDb.query(type,page);
 
         mGankApi.getGank(type, page)
                 .subscribeOn(Schedulers.io())

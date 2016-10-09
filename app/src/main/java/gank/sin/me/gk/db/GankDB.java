@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import gank.sin.me.gk.dagger.ActivityContext;
 import gank.sin.me.gk.data.model.Gank;
 
 /**
@@ -17,7 +20,7 @@ import gank.sin.me.gk.data.model.Gank;
 public class GankDB {
     private Context mContext;
 
-    public GankDB(Context context) {
+    public GankDB( Context context) {
         mContext = context;
     }
 
@@ -56,7 +59,7 @@ public class GankDB {
         db.beginTransaction();
         try {
             ganks = new ArrayList<>();
-            Cursor cursor = db.rawQuery("select * from Gank where type = ? order by id asc limit ? ,20",new String[]{type,page +""});
+            Cursor cursor = db.rawQuery("select * from Gank where type = ? order by id asc ",new String[]{type,page +""});
             while (cursor.moveToNext()){
                 String _id = cursor.getString(cursor.getColumnIndex("_id"));
                 String _desc = cursor.getString(cursor.getColumnIndex("desc"));
