@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -52,6 +53,7 @@ public class SearchActivity extends BaseActivity {
         mBinding.setViewModel(mSearchViewModel);
         setSupportActionBar(mBinding.toolbar);
         showBack();
+        mBinding.refresh.setColorSchemeColors(ContextCompat.getColor(this,R.color.colorPrimary));
         mBinding.refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

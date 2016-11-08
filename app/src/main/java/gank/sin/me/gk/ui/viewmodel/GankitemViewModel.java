@@ -74,9 +74,13 @@ public class GankItemViewModel extends BaseObservable {
     }
 
 
+    // 点击干货 item 进入详细页面
     public void onWeb(View view){
         mContext.get().startActivity(WebActivity.newIntent(mContext.get(),mGank.getDesc(),mGank.getUrl()));
     }
 
+    public void onImg(View view){
+
+    }
 
 }

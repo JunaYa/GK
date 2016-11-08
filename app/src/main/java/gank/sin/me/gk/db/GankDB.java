@@ -59,7 +59,7 @@ public class GankDB {
         db.beginTransaction();
         try {
             ganks = new ArrayList<>();
-            Cursor cursor = db.rawQuery("select * from Gank where type = ? order by id asc ",new String[]{type,page +""});
+            Cursor cursor = db.rawQuery("select * from Gank where type = ? order by id asc ",new String[]{type});
             while (cursor.moveToNext()){
                 String _id = cursor.getString(cursor.getColumnIndex("_id"));
                 String _desc = cursor.getString(cursor.getColumnIndex("desc"));

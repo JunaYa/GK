@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import gank.sin.me.gk.App;
 import gank.sin.me.gk.R;
+import gank.sin.me.gk.common.ToastUtils;
 import gank.sin.me.gk.dagger.component.ActivityComponent;
 import gank.sin.me.gk.dagger.module.ActivityModule;
 
@@ -21,6 +22,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityComponent = getComponent();
+        StatusBarColor.compat(this,getResources().getColor(R.color.colorPrimary));
     }
 
     protected ActivityComponent getComponent() {

@@ -1,9 +1,9 @@
-# Gank
 
-> * Gank 接口来自 http://gank.io/api 非常感谢 up 将其开源 
+## Gank 简介
 
-## Gank 简介 
-  最近在学习 MVP 和 MVVM 以及以下的主流技术，因为有 Gank 这样的开源 API ，每天有技术干货分享 ,再有非常喜欢 Drakket 的MeiZi 的代码，其中学习了不少。所以就想着要做一个自己的 Gank ，可能以后会把自己喜欢的部分再加进来的 。
+目的:
+  学到的东东要用起来才是自己的,当然还可以拿出来与大家分享交流,可以收获这是我要的,还有我也喜欢✨星星
+
 ### Gank 的主要技术
 > * 项目使用 Dagger2 来构建 将 MVVM 应用其中 使得 Activity/Fragment 清晰简洁
 > * 网络请求使用 Retrofit2 、 OkHttp  和 RxJava 的结合
@@ -12,6 +12,15 @@
 
 ## AND
  如果看到了代码中有什么地方觉得不妥或者其他， 有什么建议或者问题非常欢迎提出
+
+ > * 非常感谢 Gank 接口来自 http://gank.io/api
+ > * 非常感谢 我帅 http://zhaiyifan.cn/
+ > * 非常感谢 Drakeet 的妹子 https://drakeet.me/
+
+
+ >  我是 JunaYa 。联系方式： ayac3j@gmail.com , qq : 1241897972
+
+
 ## LICENSE
 
 Copyright 2016 JunaYa

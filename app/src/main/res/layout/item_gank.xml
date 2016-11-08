@@ -14,39 +14,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:background="@drawable/bg_item_gank"
         android:clickable="true"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
         android:onClick="@{viewModel.onWeb}"
-        android:background="@drawable/bg_item_gank">
-
+        android:paddingBottom="@dimen/_8dp"
+        android:paddingTop="@dimen/_8dp"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin">
 
         <TextView
             android:id="@+id/dsc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_16sp"
+            style="@style/gank_item_text_style"
+            android:textColor="@color/gray"
             android:text="@{viewModel.desc}"
             tools:text="description"/>
+
         <TextView
             android:id="@+id/who"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_16sp"
+            style="@style/gank_item_text_style"
             android:text="@{viewModel.who}"
-            android:textStyle="bold"
             tools:text="who"/>
+
         <TextView
-            android:id="@+id/publish_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_16sp"
-            android:gravity="right"
-            android:text="@{viewModel.publishedAt}"
+            style="@style/gank_item_text_style"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textColor="@color/gold"
+            android:layout_gravity="right"
+            android:text="@{viewModel.publishedAt}"
             tools:text="2016-08-10"/>
 
     </LinearLayout>

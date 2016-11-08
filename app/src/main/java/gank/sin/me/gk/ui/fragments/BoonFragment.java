@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,12 +111,12 @@ public class BoonFragment extends BaseFragment {
                 }
             }
         });
-        return mBinding.getRoot();
+
+        return view;
     }
 
     @Override
     public void onResume() {
-
 
         super.onResume();
         if (mBoonViewModel.isEmpty() && !mBinding.refresh.isRefreshing()) {
@@ -143,6 +144,7 @@ public class BoonFragment extends BaseFragment {
 
         GankDB mGankDb = new GankDB(getActivity());
         List<Gank> localGanks = mGankDb.query(type,page);
+        Log.d("fdasd======",localGanks.size()+" apge ");
 
         mGankApi.getGank(type, page)
                 .subscribeOn(Schedulers.io())

@@ -1,10 +1,12 @@
 package gank.sin.me.gk.ui.adapter;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,6 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 
 import gank.sin.me.gk.R;
+import gank.sin.me.gk.dagger.ActivityContext;
 import gank.sin.me.gk.data.model.Gank;
 import gank.sin.me.gk.databinding.ItemBoonBinding;
 import gank.sin.me.gk.databinding.ItemGankBinding;
@@ -37,11 +40,19 @@ public class GankAdapter extends RecyclerView.Adapter<BindingViewHolder> {
     private boolean isNoMore = false;
     private List<Gank> mGanks;
     private Provider<GankItemViewModel> mProviderGank;
+    private Context mContext;
+
+    private onImageClick onImageClick;
+
+    public void setOnImageClick(GankAdapter.onImageClick onImageClick) {
+        this.onImageClick = onImageClick;
+    }
 
     @Inject
-    public GankAdapter(Provider<GankItemViewModel> provider) {
+    public GankAdapter(Provider<GankItemViewModel> provider , @ActivityContext Context context) {
         mProviderGank = provider;
         mGanks = Collections.emptyList();
+        mContext = context;
     }
 
     public void setGanks(List<Gank> ganks) {
@@ -79,12 +90,14 @@ public class GankAdapter extends RecyclerView.Adapter<BindingViewHolder> {
             ViewFootNoMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.view_foot_no_more, parent, false);
             return new BindingViewHolder(binding);
         } else if (viewType == TYPE_BOON) {
-            ItemBoonBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_boon, parent, false);
+          ItemBoonBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_boon, parent, false);
             return new BindingViewHolder(binding);
         } else {
             ItemGankBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_gank, parent, false);
             return new BindingViewHolder(binding);
         }
+
+
 
     }
 
@@ -93,25 +106,28 @@ public class GankAdapter extends RecyclerView.Adapter<BindingViewHolder> {
         if (getItemViewType(position) == TYPE_MORE) return;
         else if (getItemViewType(position) == TYPE_NO_MORE) return;
         else if (getItemViewType(position) == TYPE_BOON) {
-            ItemBoonBinding binding = (ItemBoonBinding) holder.getBinding();
+            final ItemBoonBinding binding = (ItemBoonBinding) holder.getBinding();
+            binding.executePendingBindings();
             GankItemViewModel model = mProviderGank.get();
             model.setGank(mGanks.get(position));
             binding.setViewModel(model);
             Uri uri = Uri.parse(model.getUrl()+"?imageView2/0/w/100");
             binding.img.setImageURI(uri);
+
         } else {
             ItemGankBinding binding = (ItemGankBinding) holder.getBinding();
             GankItemViewModel model = mProviderGank.get();
             model.setGank(mGanks.get(position));
             binding.setViewModel(model);
         }
+
     }
 
 
     @Override
     public int getItemCount() {
         if (isMore || isNoMore) return mGanks == null ? 0 : mGanks.size() + 1;
-        else return mGanks.size() > 0 ? mGanks.size() : 0;
+        else return mGanks.size() ;
     }
 
     @Override
@@ -121,5 +137,9 @@ public class GankAdapter extends RecyclerView.Adapter<BindingViewHolder> {
         else if (mGanks.size() > 0 && mGanks.get(position).getType().equals("福利")) return TYPE_BOON;
         else return TYPE_DEFUALT;
 
+    }
+
+    public interface onImageClick{
+        void onClick(TextView textView);
     }
 }

@@ -14,7 +14,6 @@ import javax.inject.Provider;
 import gank.sin.me.gk.data.model.Gank;
 import gank.sin.me.gk.db.GankDB;
 import gank.sin.me.gk.ui.adapter.GankAdapter;
-import gank.sin.me.gk.ui.base.DiffCallback;
 
 /**
  * Created by sin on 2016/8/15.

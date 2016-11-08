@@ -24,8 +24,13 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ActivityMainBinding mBinding;
-    @Inject MainViewModel mMainViewModel;
-    @Inject @Named("fragments") ArrayList<BaseFragment> mFragments;
+    @Inject
+    MainViewModel mMainViewModel;
+    @Inject
+    @Named("fragments")
+    ArrayList<BaseFragment> mFragments;
+
+    private boolean linear = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +56,6 @@ public class MainActivity extends BaseActivity
         getBoonFragment().initRecycler(mMainViewModel.getLinearLayoutManager());
     }
 
-
     @Override
     public void onBackPressed() {
         if (mBinding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -60,6 +64,7 @@ public class MainActivity extends BaseActivity
             super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,32 +75,17 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        switch (id){
+        switch (id) {
             case R.id.action_layout:
-                String linear = getString(R.string.layout_linear);
-                String grid = getString(R.string.layout_grid);
-                String menuTitle = item.getTitle().toString();
-                if (menuTitle.equals(linear)){
-                    item.setTitle(grid);
-                    item.setIcon(R.drawable.ic_menu_grid);
-                    getBoonFragment().initRecycler(mMainViewModel.getLinearLayoutManager());
-                }else if (menuTitle.equals(grid)){
-                    item.setTitle(linear);
-                    item.setIcon(R.drawable.ic_menu_linear);
-                    getBoonFragment().initRecycler(mMainViewModel.getGridLayoutManager());
-                }
+                item.setIcon(linear ? R.drawable.ic_menu_grid : R.drawable.ic_menu_linear);
+                getBoonFragment().initRecycler(linear ? mMainViewModel.getLinearLayoutManager() : mMainViewModel.getGridLayoutManager());
+                linear = !linear;
                 break;
             case R.id.action_search:
                 startActivity(SearchActivity.newIntent(this));
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -139,7 +129,7 @@ public class MainActivity extends BaseActivity
 
     }
 
-    private BoonFragment getBoonFragment(){
+    private BoonFragment getBoonFragment() {
         return (BoonFragment) mFragments.get(0);
     }
 

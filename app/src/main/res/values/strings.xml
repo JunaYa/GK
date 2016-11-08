@@ -10,7 +10,7 @@
     <string name="search">搜索</string>
 
     <!--menu-->
-    <string name="action_layout">linear</string>
+    <string name="action_layout">layout</string>
     <string name="action_search">action_search</string>
     <string name="layout_grid">grid</string>
     <string name="layout_linear">linear</string>

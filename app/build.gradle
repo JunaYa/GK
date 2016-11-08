@@ -5,10 +5,12 @@ android {
     buildToolsVersion "24.0.1"
 
 
-    dataBinding {
-        enabled = true
-    }
+        dataBinding {
+            enabled = true
+        }
+
     defaultConfig {
+
         applicationId "gank.sin.me.gk"
         minSdkVersion 15
         targetSdkVersion 24
@@ -18,6 +20,10 @@ android {
 
 
     }
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processer'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -47,10 +53,19 @@ dependencies {
     compile "com.facebook.fresco:fresco:$rootProject.frescoVersion"
     compile "com.facebook.fresco:imagepipeline-okhttp3:0.12.0+"
 
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha9'
+
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
     provided 'org.glassfish:javax.annotation:10.0-b28'
+
+
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 }

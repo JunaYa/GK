@@ -38,7 +38,7 @@
                     android:gravity="center"
                     android:text="@{viewModel.title}"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_18sp"
+                    android:textSize="@dimen/mid"
                     tools:text="gank"/>
             </android.support.v7.widget.Toolbar>
 

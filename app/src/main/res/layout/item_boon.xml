@@ -13,7 +13,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="?attr/actionBarSize"
+        android:onClick="@{viewModel.onImg}"
         android:background="@drawable/bg_boon">
 
         <com.facebook.drawee.view.SimpleDraweeView
@@ -32,7 +32,7 @@
             android:gravity="right"
             android:text="@{viewModel.publishedAt}"
             android:textColor="@color/gold"
-            android:textSize="@dimen/_16sp"
+            android:textSize="@dimen/max"
             tools:text="2016-08-10" />
     </FrameLayout>
 </layout>
